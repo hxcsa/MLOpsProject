@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Prediction Portal</title>
+    <meta name="description" content="Predict cancer outcomes based on patient data including healthcare cost, tumor size, and treatment type.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 16V12" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 8H12.01" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1>OncoPredict AI</h1>
+            </div>
+            <p class="subtitle">Advanced predictive analytics for patient outcomes</p>
+        </header>
+
+        <main class="form-wrapper">
+            <form id="prediction-form" action="/predict" method="POST">
+                <div class="form-grid">
+                    <!-- Healthcare Cost -->
+                    <div class="input-group">
+                        <label for="healthcare_cost">Healthcare Cost ($)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="healthcare_costs" name="healthcare_costs" step="0.01" placeholder="e.g., 15000.50" required>
+                            <div class="input-focus-border"></div>
+                        </div>
+                    </div>
+
+                    <!-- Tumor Size -->
+                    <div class="input-group">
+                        <label for="tumor_size">Tumor Size (mm)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="tumor_size" name="tumor_size" step="0.01" placeholder="e.g., 24.5" required>
+                            <div class="input-focus-border"></div>
+                        </div>
+                    </div>
+
+                    <!-- Mortality Rate -->
+                    <div class="input-group full-width">
+                        <label for="mortality_rate">Mortality Rate (per 100k)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="mortality_rate" name="mortality_rate" step="0.01" placeholder="e.g., 145.2" required>
+                            <div class="input-focus-border"></div>
+                        </div>
+                    </div>
+
+                    <!-- Treatment Type -->
+                    <div class="input-group">
+                        <label for="treatment_type">Treatment Type</label>
+                        <div class="select-wrapper">
+                            <select id="treatment_type" name="treatment_type" required>
+                                <option value="" disabled selected>Select treatment</option>
+                                <option value="0">Surgery</option>
+                                <option value="1">Radiation Therapy</option>
+                                <option value="2">Chemotherapy</option>
+                                <option value="3">Immunotherapy</option>
+                                <option value="4">Targeted Therapy</option>
+                            </select>
+                            <div class="select-arrow">
+                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diabetes -->
+                    <div class="input-group">
+                        <label for="diabetes">Diabetes Comorbidity</label>
+                        <div class="select-wrapper">
+                            <select id="diabetes" name="diabetes" required>
+                                <option value="" disabled selected>Select status</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                            <div class="select-arrow">
+                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submit-wrapper">
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <span>Run Prediction Model</span>
+                        <div class="btn-loader" id="btn-loader"></div>
+                    </button>
+                </div>
+            </form>
+            
+            {% if prediction is not none %}
+            <div id="result-card" class="result-card show">
+                <div class="result-header">Prediction Result</div>
+                <div class="result-value" id="prediction-value">{{ prediction }}</div>
+                <a href="/" style="text-decoration: none;"><button type="button" class="reset-btn" id="reset-btn">New Prediction</button></a>
+            </div>
+            {% endif %}
+        </main>
+    </div>
+
+    <!-- Flask integration handles form submission and result rendering -->
+</body>
+</html>

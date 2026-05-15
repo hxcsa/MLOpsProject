@@ -5,6 +5,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 import joblib 
 import os
+import sys
 from src.logger import logging
 import mlflow
 import mlflow.sklearn
@@ -14,6 +15,12 @@ import mlflow.sklearn
 from src.custom_exception import CustomException
 
 logger = logging.getLogger(__name__)
+
+def configure_console_encoding():
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
+
 
 class Model_training():
     def __init__(self, processed_data_path='artifacts/proccessed'):
@@ -39,7 +46,7 @@ class Model_training():
 
     def train_model(self):
         try:
-            self.model = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3, random_state=42)
+            self.model = GradientBoostingClassifier(n_estimators=80, learning_rate=0.02, max_depth=5, min_samples_split=4, min_samples_leaf=3, subsample=0.33, random_state=42)
             self.model.fit(self.x_train, self.y_train)
 
             joblib.dump(self.model, os.path.join(self.model_path, 'model.pkl')) 
@@ -87,6 +94,8 @@ class Model_training():
             
 
 if __name__ == "__main__":    
+    configure_console_encoding()
+
     tracking_uri = os.getenv("MLFLOW_TRACKING_URI", "sqlite:///mlflow.db")
     experiment_name = os.getenv("MLFLOW_EXPERIMENT_NAME", "Cancer Prediction")
 
@@ -100,6 +109,10 @@ if __name__ == "__main__":
         model_trainer.run()
 
         mlflow.log_params({"model_name": "GradientBoostingClassifier"})
-        mlflow.log_params({"n_estimators": 100})
-        mlflow.log_params({"learning_rate": 0.1})
-        mlflow.log_params({"max_depth": 3})
+        mlflow.log_params({"n_estimators": 200})
+        mlflow.log_params({"learning_rate": 0.03})
+        mlflow.log_params({"max_depth": 5})
+        mlflow.log_params({"min_samples_split": 4})
+        mlflow.log_params({"min_samples_leaf": 3})
+        mlflow.log_params({"subsample": 0.33})
+        mlflow.log_params({"random_state": 42})

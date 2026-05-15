@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
-with open('requierments.txt') as f:
-    requierments = f.read().splitlines()
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
 
 setup(
     name='breast_cancer_pred',
@@ -10,5 +10,5 @@ setup(
     description='Breast Cancer Prediction',
     author='Alhas',
     license='MIT',
-    install_requires=requierments,
+    install_requires=requirements,
 )
