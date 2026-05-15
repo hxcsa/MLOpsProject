@@ -87,8 +87,13 @@ class Model_training():
             
 
 if __name__ == "__main__":    
-    mlflow.set_tracking_uri("sqlite:///mlflow.db")
-    mlflow.set_experiment("Cancer Prediction")
+    tracking_uri = os.getenv("MLFLOW_TRACKING_URI", "sqlite:///mlflow.db")
+    experiment_name = os.getenv("MLFLOW_EXPERIMENT_NAME", "Cancer Prediction")
+
+    mlflow.set_tracking_uri(tracking_uri)
+    mlflow.set_experiment(experiment_name)
+    logger.info(f"MLflow tracking URI: {mlflow.get_tracking_uri()}")
+    logger.info(f"MLflow experiment: {experiment_name}")
 
     with mlflow.start_run(run_name="Model Training"):
         model_trainer = Model_training()
