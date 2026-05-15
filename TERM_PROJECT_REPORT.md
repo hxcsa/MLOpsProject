@@ -64,7 +64,7 @@ An automated Directed Acyclic Graph (DAG) was constructed using the **Kubeflow P
 To make the model accessible, a RESTful web service was developed.
 - **Backend (`application.py`):** A Flask server that loads the `model.pkl` and `scaler.pkl`. It exposes a `/predict` endpoint that processes incoming form data, pads missing features (since the frontend requests 5 features while the scaler expects 10), and passes the vector to the model for inference.
 - **Frontend (`templates/index.html` & `static/style.css`):** A responsive, premium web interface featuring a sleek minimalist monochrome design. It utilizes Jinja2 templating to dynamically render the model's prediction back to the user seamlessly.
-- **Dockerization (`Dockerfile`):** The entire application is containerized using Docker. A `requirements.txt` file dictates dependencies, and the image is built and pushed to Docker Hub, allowing it to be spun up on any machine with a single command (`docker run -p 5000:5000 your_dockerhub/mlopsapp`).
+- **Dockerization (`Dockerfile`):** The entire application is containerized using Docker. A `requirements.txt` file dictates dependencies, and the image is built and pushed to Docker Hub, allowing it to be spun up on any machine with a single command (`docker run -p 5000:5000 hhxcsa/mlopsapp:latest`).
 
 ## 9. Conclusion
 The OncoPredict AI project successfully demonstrates the transition from a standard data science script to a fully realized MLOps product. By integrating Kubeflow for orchestration, MLflow for tracking, and Docker/Flask for deployment, the project guarantees reproducibility, scalability, and ease of access. This term project solidifies core competencies in machine learning, software engineering, and DevOps practices.

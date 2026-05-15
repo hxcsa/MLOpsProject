@@ -48,10 +48,10 @@ git clone https://github.com/yourusername/oncopredict-mlops.git
 cd oncopredict-mlops
 ```
 
-2. **Build and run via Docker:**
+2. **Run via Docker:**
 ```bash
-docker build -t oncopredict .
-docker run -p 5000:5000 oncopredict
+docker pull hhxcsa/mlopsapp:latest
+docker run -p 5000:5000 hhxcsa/mlopsapp:latest
 ```
 
 3. **Access the Web App:**
