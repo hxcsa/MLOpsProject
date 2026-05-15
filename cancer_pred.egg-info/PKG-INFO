@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: cancer-pred
+Version: 0.1.0
+Summary: Cancer prediction project
+Requires-Python: >=3.10

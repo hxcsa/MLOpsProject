@@ -1,0 +1,5 @@
+2026-05-15 01:25:37,408 - __main__ - INFO - Model_training class initialized successfully
+2026-05-15 01:25:37,424 - __main__ - INFO - Data loaded successfully
+2026-05-15 01:25:49,067 - __main__ - INFO - Model trained successfully
+2026-05-15 01:25:49,489 - __main__ - INFO - Model evaluation completed successfully. Accuracy: 0.5994328358208956, Precision: 0.5996176022465868, Recall: 0.9991537236160892, F1 Score: 0.7494632288418812, ROC AUC: 0.49878661499007704
+2026-05-15 01:25:49,490 - __main__ - INFO - Model training pipeline completed successfully

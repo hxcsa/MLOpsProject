@@ -1,0 +1,5 @@
+2026-05-15 01:24:34,467 - __main__ - INFO - Model_training class initialized successfully
+2026-05-15 01:24:34,506 - __main__ - INFO - Data loaded successfully
+2026-05-15 01:24:47,476 - __main__ - INFO - Model trained successfully
+2026-05-15 01:24:47,642 - __main__ - ERROR - Error occurred while evaluating model
+2026-05-15 01:24:47,642 - __main__ - ERROR - Error occurred while running model training pipeline
